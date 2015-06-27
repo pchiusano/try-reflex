@@ -38,8 +38,17 @@ let extendHaskellPackages = nixpkgs: haskellPackages:
           sha256 = "0yn2nj6irmj24j1djvnnq26i2lbf9g9x1wdhmcrk519glcn5k64j";
           buildDepends = [ self.semigroups ] ++ drv.buildDepends; # For some reason, without the spurious import of self.semigroups, HaskellForMaths will fail to build the environment for HaskellForMaths on ghcjs (it works on ghc)
         });
-        unix-time = dontCheck super.unix-time;
+        unix-time = overrideCabal super.unix-time (drv: {
+          version = "0.3.5";
+          sha256 = "0pk7046lmvl7dw6g7508xsixwi3gpiq5dw0a0lfwpfr80g6mh73z";
+          doCheck = false;
+        });
         word8 = dontCheck super.word8;
+        wai-extra = overrideCabal super.wai-extra (drv: {
+          version = "3.0.5";
+          sha256 = "1z4ifsldm1j6kf7jnbq8j4pk39f5d51yrygaxfs1m3mnnvr8xl52";
+          doCheck = false;
+        });
       };
     };
 
